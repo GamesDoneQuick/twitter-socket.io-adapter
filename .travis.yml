@@ -1,0 +1,24 @@
+language: node_js
+cache:
+  apt: true
+  directories:
+  - node_modules
+  - "$HOME/.npm"
+node_js:
+- '8'
+install:
+- npm install -g sentry-cli-binary
+- npm install
+before_script:
+- sentry-cli releases set-commits "$TRAVIS_COMMIT" --commit "${TRAVIS_REPO_SLUG,,}@$TRAVIS_COMMIT"
+- sentry-cli releases new "$TRAVIS_COMMIT"
+after_success:
+- sentry-cli releases finalize "$TRAVIS_COMMIT"
+- sentry-cli releases deploys "$TRAVIS_COMMIT" new -e "production"
+notifications:
+  slack:
+    rooms:
+      secure: Q5MYvAEjhgoetwq9VObZkwBhxQSDEo7Owvgh/AHp0TcKAepZVArWO59jGT4PjZLwz6w7cbIQCGV7loJoJQq1R0N5oIcqhnjmQu4k5p1iA5bxwf47DfjLo7N/vkU4nGXMfdMK2uRLvbdIS/hCWQZ6uLr2PJLHPWJD8efR0CAyTqFKB7D1V41qzq8fbqvzAczfCJIxcv0qoi2PshXLUIpBndZccfgPXajzL/x/DVw6tdqhtdtrWNpKyUeEsbRJtXYgyRQqliTge9vyr/S49JHTo37Qy4OPjMzClqf2MLqCJzlkqGCX9hXbpkEQr3eTwbkMGGIqaF23ZBs31YNV/HIQBnGg0zqNq9G1WOcwQi0LcWIxmGqMegzmsE43aeDCEHhOkZkYdJbPgpG0a1iE36L6PgRUEMyW3gixefqGQp1nf89/PMjd6wfxXk2QTr+iUrbHw4NN40NYQ3zoYSfFpNlB7b5Y5VGUudKVcd81qLD9X42jjI8dJ/2C79gzsu5DOJlOoS2kfr3LzoC0DD2JJ5eC+8pAZzFE77K48nEDkJPMs1hy4A6iitDXw1VO00GaE08MuMoAOS+Nj9WXF0xYSa2y9QSqiHLxnEhIc/YdGooaXUzDr3Zu00AkOormyTTVQW8tGN7ckv+D/vkmN8v8N2nSInx8qFLS1IBJDOsZ5HoKsH8=
+    on_success: change
+    on_failure: always
+    on_pull_requests: false

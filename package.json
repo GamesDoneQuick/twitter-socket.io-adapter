@@ -1,0 +1,59 @@
+{
+  "name": "twitter-socket.io-adapter",
+  "version": "1.0.0",
+  "description": "A microservice which translates Twitter's new WebHook-based API into a Socket.IO-based one.",
+  "engines": {
+    "node": "5.9.1"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "static": "tslint -c tslint.json 'src/**/*.ts'",
+    "pretest": "npm run static",
+    "test": "echo \"No tests yet.\"",
+    "prebuild": "npm run test",
+    "build": "trash dist && tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "convict": "^4.2.0",
+    "express": "4.13.3",
+    "raven": "^2.6.2",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "socket.io": "2.0.4",
+    "tslib": "^1.9.1",
+    "uuid": "^3.2.1",
+    "winston": "^2.4.2",
+    "winston-daily-rotate-file": "^3.1.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gamesdonequick/twitter-websocket-adapter"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express",
+    "webhook",
+    "twitter",
+    "websocket"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/convict": "^4.2.0",
+    "@types/express": "^4.11.1",
+    "@types/nconf": "0.0.37",
+    "@types/node": "^10.1.2",
+    "@types/raven": "^2.5.1",
+    "@types/request-promise": "^4.1.41",
+    "@types/socket.io": "^1.4.33",
+    "@types/uuid": "^3.4.3",
+    "@types/winston": "^2.3.9",
+    "trash-cli": "^1.4.0",
+    "ts-node": "^6.0.3",
+    "tslint": "^5.10.0",
+    "tslint-xo": "^0.8.0",
+    "typescript": "^2.8.3"
+  }
+}

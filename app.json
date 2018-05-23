@@ -1,0 +1,30 @@
+{
+  "name": "twitter-socket.io-adapter",
+  "description": "A microservice which translates Twitter's new WebHook-based API into a Socket.IO-based one.",
+  "repository": "https://github.com/gamesdonequick/twitter-websocket-adapter",
+  "keywords": ["node", "express", "api", "webhook", "twitter", "websocket"],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "env": {
+    "TWITTER_ACCESS_TOKEN": {
+      "description": "Your Twitter app's access token. Get this from the \"Keys and Access Tokens\" tab of your app on https://apps.twitter.com/"
+    },
+    "TWITTER_ACCESS_TOKEN_SECRET": {
+      "description": "Your Twitter app's access token secret. Get this from the \"Keys and Access Tokens\" tab of your app on https://apps.twitter.com/"
+    },
+    "TWITTER_CONSUMER_KEY": {
+      "description": "Your Twitter app's consumer key. Get this from the \"Keys and Access Tokens\" tab of your app on https://apps.twitter.com/"
+    },
+    "TWITTER_CONSUMER_SECRET": {
+      "description": "Your Twitter app's consumer secret. Get this from the \"Keys and Access Tokens\" tab of your app on https://apps.twitter.com/"
+    },
+    "SENTRY_DSN": {
+      "description": "Your Sentry.io project DSN, used for error reporting and tracking.",
+      "required": false
+    }
+  }
+}
