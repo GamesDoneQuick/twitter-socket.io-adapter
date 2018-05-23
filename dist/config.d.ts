@@ -10,5 +10,6 @@ declare const conf: convict.Config<{
     sentry: {
         dsn: any;
     };
+    secretKey: string;
 }>;
 export default conf;

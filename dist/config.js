@@ -48,6 +48,13 @@ const conf = convict({
             env: 'SENTRY_DSN',
             arg: 'sentryDsn'
         }
+    },
+    secretKey: {
+        doc: 'The pre-shared secret key that sockets must provide for them to remain connected and receive data.',
+        format: String,
+        default: '',
+        env: 'SECRET_KEY',
+        arg: 'secretKey'
     }
 });
 if (fs.existsSync('./config.json')) {
