@@ -6,3 +6,4 @@
  * @return string
  */
 export declare function getChallengeResponse(crcToken: string, consumerSecret: string): string;
+export declare function validateSignatureHeader(bodyPayload: string, consumerSecret: string, headerDigest: string | undefined): boolean;

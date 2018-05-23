@@ -12,8 +12,14 @@ const app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+function rawBodySaver(req: Express.Request, _res: Express.Response, buf: Buffer, encoding: string) {
+	if (buf && buf.length) {
+		(req as any).rawBody = buf.toString(encoding || 'utf8');
+	}
+}
+
+app.use(bodyParser.json({verify: rawBodySaver}));
+app.use(bodyParser.urlencoded({extended: true, verify: rawBodySaver}));
 
 // start server
 const server = app.listen(app.get('port'), () => {
@@ -46,14 +52,31 @@ app.get('/webhook/twitter', (request, response) => {
  * Receives Account Activity events
  */
 app.post('/webhook/twitter', (request, response) => {
-	log.info('Incoming webhook activity:', request.body);
+	const authenticated = security.validateSignatureHeader(
+		(request as any).rawBody,
+		config.get('twitter').consumerSecret,
+		request.header('x-twitter-webhooks-signature')
+	);
+
+	if (!authenticated) {
+		log.warn(
+			'Unauthorized webhook POST from hostname "%s" (remoteAddress: %s):',
+			request.hostname,
+			request.connection.remoteAddress,
+			request.body
+		);
+		response.sendStatus(401);
+		return;
+	}
+
+	log.info('Authorized webhook POST:', request.body);
 
 	ioServer.emit(socket.ACTIVITY_EVENT, {
 		internal_id: uuid(),
 		event: request.body
 	});
 
-	response.send('200 OK');
+	response.sendStatus(200);
 });
 
 /**

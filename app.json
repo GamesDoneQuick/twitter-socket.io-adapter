@@ -10,6 +10,10 @@
     }
   },
   "env": {
+    "SECRET_KEY": {
+      "description": "A secret key, used as a pre-shared key to authenticate clients.",
+      "generator": "secret"
+    },
     "TWITTER_ACCESS_TOKEN": {
       "description": "Your Twitter app's access token. Get this from the \"Keys and Access Tokens\" tab of your app on https://apps.twitter.com/"
     },

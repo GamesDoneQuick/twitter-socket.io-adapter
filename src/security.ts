@@ -10,3 +10,12 @@ import * as crypto from 'crypto';
 export function getChallengeResponse(crcToken: string, consumerSecret: string) {
 	return crypto.createHmac('sha256', consumerSecret).update(crcToken).digest('base64');
 }
+
+export function validateSignatureHeader(bodyPayload: string, consumerSecret: string, headerDigest: string | undefined) {
+	if (!headerDigest) {
+		return false;
+	}
+
+	const computedDigest = crypto.createHmac('sha256', consumerSecret).update(bodyPayload).digest('base64');
+	return crypto.timingSafeEqual(Buffer.from(computedDigest), Buffer.from(headerDigest));
+}

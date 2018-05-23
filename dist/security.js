@@ -12,4 +12,12 @@ function getChallengeResponse(crcToken, consumerSecret) {
     return crypto.createHmac('sha256', consumerSecret).update(crcToken).digest('base64');
 }
 exports.getChallengeResponse = getChallengeResponse;
+function validateSignatureHeader(bodyPayload, consumerSecret, headerDigest) {
+    if (!headerDigest) {
+        return false;
+    }
+    const computedDigest = crypto.createHmac('sha256', consumerSecret).update(bodyPayload).digest('base64');
+    return crypto.timingSafeEqual(Buffer.from(computedDigest), Buffer.from(headerDigest));
+}
+exports.validateSignatureHeader = validateSignatureHeader;
 //# sourceMappingURL=security.js.map
