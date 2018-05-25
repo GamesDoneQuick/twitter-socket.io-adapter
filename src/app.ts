@@ -4,7 +4,6 @@ import * as express from 'express';
 import * as requestPromise from 'request-promise';
 import * as security from './security';
 import * as socket from './socket';
-import * as uuid from 'uuid/v4';
 import log from './log';
 import './sentry'; // tslint:disable-line:no-import-side-effect
 
@@ -77,10 +76,7 @@ app.post('/webhook/twitter', (request, response) => {
 
 	log.debug(request.body);
 
-	ioServer.emit(socket.ACTIVITY_EVENT, {
-		internal_id: uuid(),
-		event: request.body
-	});
+	ioServer.emit('twitter-webhook-payload', request.body);
 
 	response.sendStatus(200);
 });

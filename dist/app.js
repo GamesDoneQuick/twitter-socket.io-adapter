@@ -6,7 +6,6 @@ const express = require("express");
 const requestPromise = require("request-promise");
 const security = require("./security");
 const socket = require("./socket");
-const uuid = require("uuid/v4");
 const log_1 = require("./log");
 require("./sentry"); // tslint:disable-line:no-import-side-effect
 const app = express();
@@ -53,10 +52,7 @@ app.post('/webhook/twitter', (request, response) => {
     }
     log_1.default.info('Authorized webhook POST from hostname "%s" (remoteAddress: %s).', request.hostname, request.connection.remoteAddress);
     log_1.default.debug(request.body);
-    ioServer.emit(socket.ACTIVITY_EVENT, {
-        internal_id: uuid(),
-        event: request.body
-    });
+    ioServer.emit('twitter-webhook-payload', request.body);
     response.sendStatus(200);
 });
 /**

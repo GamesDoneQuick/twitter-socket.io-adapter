@@ -2,10 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const socketIO = require("socket.io");
 const SocketIOAuth = require("socketio-auth");
-const uuid = require("uuid/v4");
 const log_1 = require("./log");
 const config_1 = require("./config");
-exports.ACTIVITY_EVENT = 'activity_event_' + uuid();
 /**
  * Initilaizes socket.io
  */

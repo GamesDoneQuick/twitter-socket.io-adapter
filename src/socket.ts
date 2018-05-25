@@ -1,11 +1,8 @@
 import * as socketIO from 'socket.io';
 import * as SocketIOAuth from 'socketio-auth';
-import * as uuid from 'uuid/v4';
 import * as http from 'http';
 import log from './log';
 import config from './config';
-
-export const ACTIVITY_EVENT = 'activity_event_' + uuid();
 
 /**
  * Initilaizes socket.io
