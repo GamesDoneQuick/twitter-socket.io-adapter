@@ -69,6 +69,6 @@ if (fs.existsSync('./config.json')) {
 }
 
 // Perform validation
-conf.validate({strict: true});
+conf.validate({allowed: 'strict'});
 
 export default conf;
