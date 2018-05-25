@@ -64,23 +64,29 @@ app.post('/webhook/twitter', (request, response) => {
 app.get('/', (_request, response) => {
     response.send('Hello world.\n');
 });
-requestPromise.post({
-    url: `https://api.twitter.com/1.1/account_activity/all/${config_1.default.get('twitter').env}/webhooks.json`,
-    oauth: {
+init().catch(error => {
+    log_1.default.error('Failed to init:', error);
+});
+async function init() {
+    const oauth = {
         consumer_key: config_1.default.get('twitter').consumerKey,
         consumer_secret: config_1.default.get('twitter').consumerSecret,
         token: config_1.default.get('twitter').accessToken,
         token_secret: config_1.default.get('twitter').accessTokenSecret
-    },
-    headers: {
-        'Content-type': 'application/x-www-form-urlencoded'
-    },
-    form: {
-        url: `https://${process.env.HEROKU_APP_NAME}.herokuapp.com/webhook/twitter`
-    }
-}).then((responseBody) => {
-    log_1.default.info(responseBody);
-}).catch((error) => {
-    log_1.default.error('Failed to register webhook:', error);
-});
+    };
+    await requestPromise.post({
+        url: `https://api.twitter.com/1.1/account_activity/all/${config_1.default.get('twitter').env}/webhooks.json`,
+        oauth,
+        headers: {
+            'Content-type': 'application/x-www-form-urlencoded'
+        },
+        form: {
+            url: `https://${process.env.HEROKU_APP_NAME}.herokuapp.com/webhook/twitter`
+        }
+    });
+    await requestPromise.post({
+        url: `https://api.twitter.com/1.1/account_activity/all/${config_1.default.get('twitter').env}/subscriptions.json`,
+        oauth
+    });
+}
 //# sourceMappingURL=app.js.map
