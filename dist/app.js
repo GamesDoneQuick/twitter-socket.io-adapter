@@ -82,6 +82,7 @@ async function init() {
             bearer: bearerToken
         }
     });
+    log_1.default.info('existingWebhooks:', existingWebhooks);
     // If our Webhook is already registered, just trigger a CRC for it.
     // Else, register it now.
     if (existingWebhooks.find((webhook) => webhook.url === webhookUrl)) {

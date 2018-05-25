@@ -68,6 +68,6 @@ if (fs.existsSync('./config.json')) {
     conf.loadFile('./config.json');
 }
 // Perform validation
-conf.validate({ strict: true });
+conf.validate({ allowed: 'strict' });
 exports.default = conf;
 //# sourceMappingURL=config.js.map
