@@ -12,3 +12,4 @@ export declare function getChallengeResponse(crcToken: string, consumerSecret: s
  * @param headerDigest - The digest provided by the x-twitter-webhooks-signature on the request.
  */
 export declare function validateSignatureHeader(bodyPayload: string, consumerSecret: string, headerDigest: string | undefined): boolean;
+export declare function getTwitterBearerToken(): Promise<string>;

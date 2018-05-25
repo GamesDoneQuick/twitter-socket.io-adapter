@@ -91,6 +91,7 @@ init().catch(error => {
 });
 
 async function init() {
+	const webhookUrl = `https://${process.env.HEROKU_APP_NAME}.herokuapp.com/webhook/twitter`;
 	const oauth = {
 		consumer_key: config.get('twitter').consumerKey,
 		consumer_secret: config.get('twitter').consumerSecret,
@@ -98,16 +99,34 @@ async function init() {
 		token_secret: config.get('twitter').accessTokenSecret
 	};
 
-	await requestPromise.post({
+	const bearerToken = await security.getTwitterBearerToken();
+
+	const existingWebhooks = await requestPromise.get({
 		url: `https://api.twitter.com/1.1/account_activity/all/${config.get('twitter').env}/webhooks.json`,
-		oauth,
-		headers: {
-			'Content-type': 'application/x-www-form-urlencoded'
-		},
-		form: {
-			url: `https://${process.env.HEROKU_APP_NAME}.herokuapp.com/webhook/twitter`
+		auth: {
+			bearer: bearerToken
 		}
 	});
+
+	// If our Webhook is already registered, just trigger a CRC for it.
+	// Else, register it now.
+	if (existingWebhooks.find((webhook: any) => webhook.url === webhookUrl)) {
+		await requestPromise.put({
+			url: `https://api.twitter.com/1.1/account_activity/all/${config.get('twitter').env}/webhooks.json`,
+			oauth
+		});
+	} else {
+		await requestPromise.post({
+			url: `https://api.twitter.com/1.1/account_activity/all/${config.get('twitter').env}/webhooks.json`,
+			oauth,
+			headers: {
+				'Content-type': 'application/x-www-form-urlencoded'
+			},
+			form: {
+				url: webhookUrl
+			}
+		});
+	}
 
 	await requestPromise.post({
 		url: `https://api.twitter.com/1.1/account_activity/all/${config.get('twitter').env}/subscriptions.json`,
