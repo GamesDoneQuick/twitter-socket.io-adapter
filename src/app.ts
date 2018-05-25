@@ -98,7 +98,7 @@ requestPromise.post({
 		'Content-type': 'application/x-www-form-urlencoded'
 	},
 	form: {
-		url: `https://${process.env.HEROKU_APP_NAME}.herokuapp.com/`
+		url: `https://${process.env.HEROKU_APP_NAME}.herokuapp.com/webhook/twitter`
 	}
 }).then((responseBody: any) => {
 	log.info(responseBody);
