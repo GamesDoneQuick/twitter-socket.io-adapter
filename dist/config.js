@@ -38,6 +38,13 @@ const conf = convict({
             default: '',
             env: 'TWITTER_ACCESS_TOKEN_SECRET',
             arg: 'twitterAccessTokenSecret'
+        },
+        env: {
+            doc: 'Twitter API environment to use',
+            format: String,
+            default: 'env-beta',
+            env: 'TWITTER_API_ENV',
+            arg: 'twitterApiEnv'
         }
     },
     sentry: {

@@ -6,12 +6,17 @@ const crypto = require("crypto");
  * your app Consumer Secret.
  * @param crcToken - The token provided by the incoming GET request.
  * @param consumerSecret - The consumer secret of this application from apps.twitter.com.
- * @return string
  */
 function getChallengeResponse(crcToken, consumerSecret) {
     return crypto.createHmac('sha256', consumerSecret).update(crcToken).digest('base64');
 }
 exports.getChallengeResponse = getChallengeResponse;
+/**
+ * See https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/securing-webhooks
+ * @param bodyPayload - The raw string body of the incoming webhook POST request.
+ * @param consumerSecret - The consumer secret of this application from apps.twitter.com.
+ * @param headerDigest - The digest provided by the x-twitter-webhooks-signature on the request.
+ */
 function validateSignatureHeader(bodyPayload, consumerSecret, headerDigest) {
     if (!headerDigest) {
         return false;

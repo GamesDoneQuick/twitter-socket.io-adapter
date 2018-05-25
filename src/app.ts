@@ -87,7 +87,7 @@ app.get('/', (_request, response) => {
 });
 
 requestPromise.post({
-	url: 'https://api.twitter.com/1.1/account_activity/all/env-premium/webhooks.json',
+	url: `https://api.twitter.com/1.1/account_activity/all/${config.get('twitter').env}/webhooks.json`,
 	oauth: {
 		consumer_key: config.get('twitter').consumerKey,
 		consumer_secret: config.get('twitter').consumerSecret,

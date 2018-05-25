@@ -6,6 +6,7 @@ declare const conf: convict.Config<{
         consumerSecret: any;
         accessToken: any;
         accessTokenSecret: any;
+        env: any;
     };
     sentry: {
         dsn: any;
