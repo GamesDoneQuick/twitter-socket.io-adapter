@@ -24,6 +24,8 @@ export function validateSignatureHeader(bodyPayload: string, consumerSecret: str
 	}
 
 	const computedDigest = crypto.createHmac('sha256', consumerSecret).update(bodyPayload).digest('base64');
+	console.log('headerDigest:', headerDigest);
+	console.log('computedDigest:', computedDigest);
 	return crypto.timingSafeEqual(Buffer.from(computedDigest), Buffer.from(headerDigest));
 }
 
