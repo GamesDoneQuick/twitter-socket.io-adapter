@@ -51,7 +51,8 @@ app.post('/webhook/twitter', (request, response) => {
         response.sendStatus(401);
         return;
     }
-    log_1.default.info('Authorized webhook POST:', request.body);
+    log_1.default.info('Authorized webhook POST from hostname "%s" (remoteAddress: %s).', request.hostname, request.connection.remoteAddress);
+    log_1.default.debug(request.body);
     ioServer.emit(socket.ACTIVITY_EVENT, {
         internal_id: uuid(),
         event: request.body
