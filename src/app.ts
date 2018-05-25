@@ -90,7 +90,9 @@ requestPromise.post({
 	url: `https://api.twitter.com/1.1/account_activity/all/${config.get('twitter').env}/webhooks.json`,
 	oauth: {
 		consumer_key: config.get('twitter').consumerKey,
-		token: config.get('twitter').accessToken
+		consumer_secret: config.get('twitter').consumerSecret,
+		token: config.get('twitter').accessToken,
+		token_secret: config.get('twitter').accessTokenSecret
 	},
 	headers: {
 		'Content-type': 'application/x-www-form-urlencoded'
