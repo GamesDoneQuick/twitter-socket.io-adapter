@@ -116,7 +116,7 @@ async function init() {
 	const existingWebhook = existingWebhooks.find((webhook: any) => webhook.url === webhookUrl);
 	if (existingWebhook) {
 		await requestPromise.put({
-			url: `https://api.twitter.com/1.1/account_activity/all/${config.get('twitter').env}/webhooks/${existingWebhook.id}`,
+			url: `https://api.twitter.com/1.1/account_activity/all/${config.get('twitter').env}/webhooks/${existingWebhook.id}.json`,
 			oauth
 		});
 	} else {
