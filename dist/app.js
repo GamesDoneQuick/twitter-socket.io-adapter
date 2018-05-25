@@ -80,7 +80,8 @@ async function init() {
         url: `https://api.twitter.com/1.1/account_activity/all/${config_1.default.get('twitter').env}/webhooks.json`,
         auth: {
             bearer: bearerToken
-        }
+        },
+        json: true
     });
     log_1.default.info('existingWebhooks:', existingWebhooks);
     // If our Webhook is already registered, just trigger a CRC for it.
