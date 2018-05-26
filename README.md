@@ -4,7 +4,7 @@
 
 # Motivation
 
-Twitter's new Account Activity API is based on WebHooks. That's great, unless your application is behind a firewall and you can't forward any ports (which is the case for the NodeCG instances on-site at GDQ events).
+Twitter's new Account Activity API is based on WebHooks. That's great, unless your application is behind a firewall and you can't forward any ports (which is the case for the [NodeCG](https://github.com/nodecg/nodecg) instances on-site at GDQ events).
 
 This small microservice creates a Socket.IO server which translates these incoming WebHook POSTs into outgoing Socket.IO events. Since Socket.IO connections can be initiated from behind a firewall, the NodeCG instance on-site at GamesDoneQuick is able to connect and receive this realtime stream of events.
 
