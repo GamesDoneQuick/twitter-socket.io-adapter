@@ -2,6 +2,8 @@
 
 > A microservice which translates Twitter's new WebHook-based API into a Socket.IO-based one.
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)   
+
 # Motivation
 
 Twitter's new Account Activity API is based on WebHooks. That's great, unless your application is behind a firewall and you can't forward any ports (which is the case for the [NodeCG](https://github.com/nodecg/nodecg) instances on-site at GDQ events).
