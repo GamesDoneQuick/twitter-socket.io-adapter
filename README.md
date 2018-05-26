@@ -77,3 +77,7 @@ socket.on('connect', () => {
 });
 ```
 
+# License
+
+This code is available under the MIT License, which is available to read in the [LICENSE](LICENSE) file.
+
