@@ -1,9 +1,6 @@
 # twitter-socket.io-adapter [![Build Status](https://travis-ci.com/GamesDoneQuick/twitter-socket.io-adapter.svg?branch=master)](https://travis-ci.com/GamesDoneQuick/twitter-socket.io-adapter) 
 
-A microservice which translates Twitter's new WebHook-based API into a Socket.IO-based one.
-
-This application requires that Heroku's experimental "dyno metadata" feature be enabled for your deployment of this app.
-See https://devcenter.heroku.com/articles/dyno-metadata for instructions.
+> A microservice which translates Twitter's new WebHook-based API into a Socket.IO-based one.
 
 # Motivation
 
@@ -41,6 +38,9 @@ That means that you will only receive events for the account which created the a
 3) Click "Deploy app" at the bottom of the page.
 4) Once your app is deployed, go to its "Settings" page and click "Reveal Config Vars"
 5) Note down the automatically-generated `SECRET_KEY` for later.
+6) Enable Heroku's experimental "dyno metadata" feature be enabled for your deployment of this app.
+    - See https://devcenter.heroku.com/articles/dyno-metadata for instructions.
+7) Restart your deployment by clicking "More" in the top right of your Heroku dashboard, then clicking "Restart all dynos".
 
 It is strongly recommended that you upgrade from the default "Free" dyno to a $7/mo "Hobby" dyno. This will prevent your dyno from sleeping, which could cause it to miss events or have high latency.
 
