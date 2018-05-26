@@ -6,13 +6,15 @@
 
 # Motivation
 
-Twitter's new Account Activity API is based on WebHooks. That's great, unless your application is behind a firewall and you can't forward any ports (which is the case for the [NodeCG](https://github.com/nodecg/nodecg) instances on-site at GDQ events).
+Twitter is sunsetting the old [User Streams API](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/api-reference/user-stream.html).
+
+User Streams will be replaced by the new [Account Activity API](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview), which is based on WebHooks. That's great, unless your application is behind a firewall and you can't forward any ports (which is the case for the [NodeCG](https://github.com/nodecg/nodecg) instances on-site at GDQ events).
 
 This small microservice creates a Socket.IO server which translates these incoming WebHook POSTs into outgoing Socket.IO events. Since Socket.IO connections can be initiated from behind a firewall, the NodeCG instance on-site at GamesDoneQuick is able to connect and receive this realtime stream of events.
 
 # Limitations
 
-This application is written to use an "application context", as opposed to a "user context".
+This application is written to use a Twitter "application context", as opposed to a "user context".
 
 That means that you will only receive events for the account which created the application at apps.twitter.com. You cannot use `twitter-socket.io-adapter` to receive events for other accounts, and you can not use it to receive events from multiple accounts at once. You're limited to one account per deployment, and that account must be the owner of the application credentials you use in your deployment.
 
