@@ -12,11 +12,17 @@ Twitter's new Account Activity API is based on WebHooks. That's great, unless yo
 
 This small microservice creates a Socket.IO server which translates these incoming WebHook POSTs into outgoing Socket.IO events. Since Socket.IO connections can be initiated from behind a firewall, the NodeCG instance on-site at GamesDoneQuick is able to connect and receive this realtime stream of events.
 
+# Limitations
+
+This application is written to use an "application context", as opposed to a "user context".
+
+That means that you will only receive events for the account which created the application at apps.twitter.com. You cannot use `twitter-socket.io-adapter` to receive events for other accounts, and you can not use it to receive events from multiple accounts at once. You're limited to one account per deployment, and that account must be the owner of the application credentials you use in your deployment.
+
 # Pre-Installation Setup
 
 > 💡 If you already have a Twitter App which is set up for the Account Activity API, you may skip these steps.
 
-1) [Apply for access to Twitter's "Premium" APIs](https://developer.twitter.com/en/apply-for-access)
+1) **Using the account you wish to receive events for**, [apply for access to Twitter's "Premium" APIs](https://developer.twitter.com/en/apply-for-access).
 2) Wait 3-5 business days to be approved.
 3) Once approved, create an app at https://apps.twitter.com/
 4) On the Permissions tab of your App, set "Access" to "Read, Write, and Access direct messages". 
