@@ -5,11 +5,12 @@ import * as requestPromise from 'request-promise';
 import * as security from './security';
 import * as socket from './socket';
 import log from './log';
-import './sentry'; // tslint:disable-line:no-import-side-effect
+import * as Sentry from './sentry'; // tslint:disable-line:no-import-side-effect
 
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));
+Sentry.init(app);
 
 function rawBodySaver(req: Express.Request, _res: Express.Response, buf: Buffer, encoding: string) {
 	if (buf && buf.length) {

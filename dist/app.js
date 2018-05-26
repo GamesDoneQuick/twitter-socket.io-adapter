@@ -7,9 +7,10 @@ const requestPromise = require("request-promise");
 const security = require("./security");
 const socket = require("./socket");
 const log_1 = require("./log");
-require("./sentry"); // tslint:disable-line:no-import-side-effect
+const Sentry = require("./sentry"); // tslint:disable-line:no-import-side-effect
 const app = express();
 app.set('port', (process.env.PORT || 5000));
+Sentry.init(app);
 function rawBodySaver(req, _res, buf, encoding) {
     if (buf && buf.length) {
         req.rawBody = buf.toString(encoding || 'utf8');

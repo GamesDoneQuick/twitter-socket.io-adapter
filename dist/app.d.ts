@@ -1,1 +1,1 @@
-import './sentry';
+export {};
