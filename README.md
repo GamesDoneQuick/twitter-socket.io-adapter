@@ -1,6 +1,6 @@
 # twitter-socket.io-adapter [![Build Status](https://travis-ci.com/GamesDoneQuick/twitter-socket.io-adapter.svg?branch=master)](https://travis-ci.com/GamesDoneQuick/twitter-socket.io-adapter) 
 
-> A microservice which translates Twitter's new WebHook-based API into a Socket.IO-based one.
+> A microservice which translates Twitter's new WebHook-based Account Activity API into a Socket.IO-based one.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)   
 

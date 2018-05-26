@@ -1,7 +1,7 @@
 {
   "name": "twitter-socket.io-adapter",
   "version": "1.0.0",
-  "description": "A microservice which translates Twitter's new WebHook-based API into a Socket.IO-based one.",
+  "description": "A microservice which translates Twitter's new WebHook-based Account Activity API into a Socket.IO-based one.",
   "engines": {
     "node": "8.11.2"
   },

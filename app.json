@@ -1,6 +1,6 @@
 {
   "name": "twitter-socket.io-adapter",
-  "description": "A microservice which translates Twitter's new WebHook-based API into a Socket.IO-based one.",
+  "description": "A microservice which translates Twitter's new WebHook-based Account Activity API into a Socket.IO-based one.",
   "repository": "https://github.com/gamesdonequick/twitter-websocket-adapter",
   "keywords": ["node", "express", "api", "webhook", "twitter", "websocket"],
   "formation": {
