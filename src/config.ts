@@ -41,7 +41,7 @@ const conf = convict({
 		env: {
 			doc: 'Twitter API environment to use',
 			format: String,
-			default: 'env-beta',
+			default: '',
 			env: 'TWITTER_API_ENV',
 			arg: 'twitterApiEnv'
 		}
