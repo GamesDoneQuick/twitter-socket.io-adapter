@@ -44,6 +44,13 @@ const conf = convict({
 			default: '',
 			env: 'TWITTER_API_ENV',
 			arg: 'twitterApiEnv'
+		},
+		deleteWebhook: {
+			doc: 'If true, deletes any existing webhook for this URL, and does not set up a new one. This is meant to be used for one-time cleanup.',
+			format: Boolean,
+			default: false,
+			env: 'TWITTER_DELETE_WEBHOOK',
+			arg: 'twitterDeleteWebhook'
 		}
 	},
 	sentry: {

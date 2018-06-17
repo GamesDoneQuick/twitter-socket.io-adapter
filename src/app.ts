@@ -118,11 +118,28 @@ async function init() {
 	// Else, register it now.
 	const existingWebhook = existingWebhooks.find((webhook: any) => webhook.url === webhookUrl);
 	if (existingWebhook) {
+		if (config.get('twitter').deleteWebhook) {
+			log.info(`Deleting webhook ${existingWebhook.id}...`);
+			await requestPromise.delete({
+				url: `https://api.twitter.com/1.1/account_activity/all/${config.get('twitter').env}/webhooks/${existingWebhook.id}.json`,
+				oauth
+			});
+			log.info(`Webhook ${existingWebhook.id} deleted.`);
+			log.info('Set TWITTER_DELETE_WEBHOOK back to "false" and restart the program to register a new webhook.');
+			return;
+		}
+
 		await requestPromise.put({
 			url: `https://api.twitter.com/1.1/account_activity/all/${config.get('twitter').env}/webhooks/${existingWebhook.id}.json`,
 			oauth
 		});
 	} else {
+		if (config.get('twitter').deleteWebhook) {
+			log.info('No existing webhooks found.');
+			log.info('Set TWITTER_DELETE_WEBHOOK back to "false" and restart the program to register a new webhook.');
+			return;
+		}
+
 		await requestPromise.post({
 			url: `https://api.twitter.com/1.1/account_activity/all/${config.get('twitter').env}/webhooks.json`,
 			oauth,

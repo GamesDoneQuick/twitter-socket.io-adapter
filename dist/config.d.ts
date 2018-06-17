@@ -7,6 +7,7 @@ declare const conf: convict.Config<{
         accessToken: any;
         accessTokenSecret: any;
         env: any;
+        deleteWebhook: any;
     };
     sentry: {
         dsn: any;
