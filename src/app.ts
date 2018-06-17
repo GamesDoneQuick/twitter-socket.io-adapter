@@ -61,7 +61,7 @@ app.post('/webhook/twitter', (request, response) => {
 	if (!authenticated) {
 		log.warn(
 			'Unauthorized webhook POST from hostname "%s" (remoteAddress: %s):',
-			request.hostname,
+			request.headers.host,
 			request.connection.remoteAddress,
 			request.body
 		);
@@ -71,7 +71,7 @@ app.post('/webhook/twitter', (request, response) => {
 
 	log.info(
 		'Authorized webhook POST from hostname "%s" (remoteAddress: %s).',
-		request.hostname,
+		request.headers.host,
 		request.connection.remoteAddress
 	);
 

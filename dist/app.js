@@ -47,11 +47,11 @@ app.get('/webhook/twitter', (request, response) => {
 app.post('/webhook/twitter', (request, response) => {
     const authenticated = security.validateSignatureHeader(request.rawBody, config_1.default.get('twitter').consumerSecret, request.header('x-twitter-webhooks-signature'));
     if (!authenticated) {
-        log_1.default.warn('Unauthorized webhook POST from hostname "%s" (remoteAddress: %s):', request.hostname, request.connection.remoteAddress, request.body);
+        log_1.default.warn('Unauthorized webhook POST from hostname "%s" (remoteAddress: %s):', request.headers.host, request.connection.remoteAddress, request.body);
         response.sendStatus(401);
         return;
     }
-    log_1.default.info('Authorized webhook POST from hostname "%s" (remoteAddress: %s).', request.hostname, request.connection.remoteAddress);
+    log_1.default.info('Authorized webhook POST from hostname "%s" (remoteAddress: %s).', request.headers.host, request.connection.remoteAddress);
     log_1.default.debug(request.body);
     ioServer.emit('twitter-webhook-payload', request.body);
     response.sendStatus(200);
