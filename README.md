@@ -10,7 +10,7 @@ Twitter is sunsetting the old [User Streams API](https://developer.twitter.com/e
 
 User Streams will be replaced by the new [Account Activity API](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview), which is based on WebHooks. That's great, unless your application is behind a firewall and you can't forward any ports ([it specifically has to be port 443](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/getting-started-with-webhooks.html#webhook-url)), which is the case for the [NodeCG](https://github.com/nodecg/nodecg) instances on-site at GDQ events.
 
-This small microservice creates a Socket.IO server which translates these incoming WebHook POSTs into outgoing Socket.IO events. Since Socket.IO connections can be initiated from behind a firewall, the NodeCG instance on-site at GamesDoneQuick is able to connect and receive this realtime stream of events.
+This microservice creates a Socket.IO server which translates these incoming WebHook POSTs into outgoing Socket.IO events. Since Socket.IO connections can be initiated from behind a firewall, the NodeCG instance on-site at GamesDoneQuick is able to connect and receive this realtime stream of events.
 
 # Limitations
 
